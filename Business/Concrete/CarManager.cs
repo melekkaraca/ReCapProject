@@ -15,28 +15,66 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
+        private List<string> Control(Car car)
+        {
+            List<string> cevaplar = new List<string>();
+            if (car.CarName.Length < 2)
+            {
+                cevaplar.Add("Araba adı minimum 2 karakter olmalıdır.");
+            }
+            if (car.DailyPrice <= 0)
+            {
+                cevaplar.Add("Araba günlük fiyatı 0'dan büyük olmalıdır");
+            }
+            return cevaplar;
+        }
         public void Add(Car car)
         {
-            if (car.CarName.Length > 2)
+            var cvpControl = Control(car);
+            if (cvpControl.Count > 0)
             {
-                if (car.DailyPrice > 0)
+                foreach (var cvp in cvpControl)
                 {
-                    _carDal.Add(car);
-                }
-                else
-                {
-                    Console.WriteLine("Araba günlük fiyatı 0'dan büyük olmalıdır");
+                    Console.WriteLine(cvp);
                 }
             }
             else
             {
-                Console.WriteLine("Araba adı minimum 2 karakter olmalıdır.");
+                _carDal.Add(car);
             }
-            
+            #region Onceki
+            //if (car.CarName.Length > 2)
+            //{
+            //    if (car.DailyPrice > 0)
+            //    {
+
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("Araba günlük fiyatı 0'dan büyük olmalıdır");
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Araba adı minimum 2 karakter olmalıdır.");
+            //} 
+            #endregion
+
         }
         public void Update(Car car)
         {
-            _carDal.Update(car);
+            var cvpControl = Control(car);
+            if (cvpControl.Count > 0)
+            {
+                foreach (var cvp in cvpControl)
+                {
+                    Console.WriteLine(cvp);
+                }
+            }
+            else
+            {
+                _carDal.Update(car);
+            }
         }
         public void Delete(Car car)
         {
