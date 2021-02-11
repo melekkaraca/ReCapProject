@@ -23,18 +23,18 @@ namespace ConsoleIU
             //{ Name = "Nissan" };
             //brandManager.Add(brand);
             var updatedBrand = brandManager.GetById(4);
-            updatedBrand.Name = "NISSAN";
-            brandManager.Update(updatedBrand);
+            updatedBrand.Data.Name = "NISSAN";
+            brandManager.Update(updatedBrand.Data);
             Console.WriteLine();
-            foreach (var item in brandManager.GetAll())
+            foreach (var item in brandManager.GetAll().Data)
             {
                 Console.WriteLine(item.Name);
             }
             Console.WriteLine();
             var deletedBrand = brandManager.GetById(3);
-            brandManager.Delete(deletedBrand);
+            brandManager.Delete(deletedBrand.Data);
             Console.WriteLine();
-            foreach (var item in brandManager.GetAll())
+            foreach (var item in brandManager.GetAll().Data)
             {
                 Console.WriteLine(item.Name);
             }
@@ -54,7 +54,7 @@ namespace ConsoleIU
             //colorManager.Update(updatedColor);
             //var deletedColor = colorManager.GetById(3);
             //colorManager.Delete(deletedColor);
-            foreach (var item in colorManager.GetAll())
+            foreach (var item in colorManager.GetAll().Data)
             {
                 Console.WriteLine(item.Name);
             }
@@ -78,7 +78,7 @@ namespace ConsoleIU
             //    ModelYear = 2015
             //};
             //carManager.Add(car);
-            foreach (var item in carManager.GetAllCarDetail())
+            foreach (var item in carManager.GetAllCarDetail().Data)
             {
                 Console.WriteLine($"Car Name: {item.CarName} - Brand Name: {item.BrandName} - Color Name: {item.ColorName} - Daily Price: {item.DailyPrice}");
             }

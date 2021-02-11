@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -11,37 +13,25 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
-
         public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
         }
-        private List<string> Control(Car car)
+
+        public IResult Add(Car car)
         {
-            List<string> cevaplar = new List<string>();
             if (car.CarName.Length < 2)
             {
-                cevaplar.Add("Araba adı minimum 2 karakter olmalıdır.");
+                return new ErrorResult(Messages.NameInValid);
             }
-            if (car.DailyPrice <= 0)
+            else if (car.DailyPrice <= 0)
             {
-                cevaplar.Add("Araba günlük fiyatı 0'dan büyük olmalıdır");
-            }
-            return cevaplar;
-        }
-        public void Add(Car car)
-        {
-            var cvpControl = Control(car);
-            if (cvpControl.Count > 0)
-            {
-                foreach (var cvp in cvpControl)
-                {
-                    Console.WriteLine(cvp);
-                }
+                return new ErrorResult("Araba günlük fiyatı 0'dan büyük olmalıdır");
             }
             else
             {
                 _carDal.Add(car);
+                return new SuccessResult(Messages.Added);
             }
             #region Onceki
             //if (car.CarName.Length > 2)
@@ -62,45 +52,46 @@ namespace Business.Concrete
             #endregion
 
         }
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
-            var cvpControl = Control(car);
-            if (cvpControl.Count > 0)
+            if (car.CarName.Length < 2)
             {
-                foreach (var cvp in cvpControl)
-                {
-                    Console.WriteLine(cvp);
-                }
+                return new ErrorResult(Messages.NameInValid);
+            }
+            else if (car.DailyPrice <= 0)
+            {
+                return new ErrorResult("Araba günlük fiyatı 0'dan büyük olmalıdır");
             }
             else
             {
                 _carDal.Update(car);
+                return new SuccessResult(Messages.Updaded);
             }
         }
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
             _carDal.Delete(car);
+            return new SuccessResult(Messages.Deleted);
         }
-        public Car GetById(int id)
+        public IDataResult<Car> GetById(int id)
         {
-            return _carDal.Get(c=> c.Id == id);
+            return new SuccessDataResult<Car>(_carDal.Get(c=> c.Id == id));
         }
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll();
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.Listed);
         }
-        public List<Car> GetCarsByBrandId(int id)
+        public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return _carDal.GetAll(c => c.BrandId == id);
+            return new SuccessDataResult<List<Car>>( _carDal.GetAll(c => c.BrandId == id));
         }
-        public List<Car> GetCarsByColorId(int id)
+        public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
-            return _carDal.GetAll(c => c.ColorId == id);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id));
         }
-
-        public List<CarDetailDto> GetAllCarDetail()
+        public IDataResult<List<CarDetailDto>> GetAllCarDetail()
         {
-            return _carDal.GetAllCarDetail();
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetail());
         }
     }
 }

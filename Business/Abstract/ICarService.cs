@@ -1,4 +1,5 @@
 ﻿using Core.Business;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
@@ -16,6 +17,6 @@ namespace Business.Abstract
         //List<Car> GetAll();
         //List<Car> GetCarsByBrandId(int id);
         //List<Car> GetCarsByColorId(int id);
-        List<CarDetailDto> GetAllCarDetail();
+        IDataResult<List<CarDetailDto>> GetAllCarDetail();
     }
 }
