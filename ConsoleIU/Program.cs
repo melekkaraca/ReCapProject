@@ -10,10 +10,17 @@ namespace ConsoleIU
     {
         static void Main(string[] args)
         {
-            CarTest();
+            //CarTest();
             //ColorTest();
             //BrandTest();
-           
+            UserTest();
+
+        }
+
+        private static void UserTest()
+        {
+            UserManager userManager = new UserManager(new EFUserDal());
+            userManager.Add(new User { FirstName = "Rabiha", LastName = "Karaca", Email = "rabihakaraca97@gmail.com", Password = "1234" });
         }
 
         private static void BrandTest()
