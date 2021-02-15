@@ -23,8 +23,9 @@ namespace Business.Concrete
             return new SuccessResult($"{entity.FirstName} {entity.LastName} {Messages.Added}");
         }
 
-        public IResult Delete(User entity)
+        public IResult Delete(int id)
         {
+            var entity = GetById(id).Data;
             _userDal.Delete(entity);
             return new SuccessResult($"{entity.FirstName} {entity.LastName} {Messages.Deleted}");
         }

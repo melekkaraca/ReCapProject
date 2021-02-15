@@ -27,8 +27,9 @@ namespace Business.Concrete
             _brandDal.Update(entity);
             return new SuccessResult($"{entity.Name } { Messages.Updaded}");
         }
-        public IResult Delete(Brand entity)
+        public IResult Delete(int id)
         {
+            var entity = GetById(id).Data;
             _brandDal.Delete(entity);
             return new SuccessResult($"{entity.Name} {Messages.Deleted}");
         }
