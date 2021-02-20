@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -18,21 +20,11 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            if (car.CarName.Length < 2)
-            {
-                return new ErrorResult(Messages.NameInValid);
-            }
-            else if (car.DailyPrice <= 0)
-            {
-                return new ErrorResult("Araba günlük fiyatı 0'dan büyük olmalıdır");
-            }
-            else
-            {
-                _carDal.Add(car);
-                return new SuccessResult(Messages.Added);
-            }
+            _carDal.Add(car);
+            return new SuccessResult(Messages.Added);
             #region Onceki
             //if (car.CarName.Length > 2)
             //{
@@ -50,8 +42,20 @@ namespace Business.Concrete
             //    Console.WriteLine("Araba adı minimum 2 karakter olmalıdır.");
             //} 
             #endregion
+            #region Onceki2
+            //if (car.CarName.Length < 2)
+            //{
+            //    return new ErrorResult(Messages.NameInValid);
+            //}
+            //else if (car.DailyPrice <= 0)
+            //{
+            //    return new ErrorResult("Araba günlük fiyatı 0'dan büyük olmalıdır");
+            //}
+            //else
 
+            #endregion
         }
+    
         public IResult Update(Car car)
         {
             if (car.CarName.Length < 2)
