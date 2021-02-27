@@ -14,5 +14,7 @@ namespace Business.Constants
         public static string Listed = "Listelendi.";
         public static string Rental = "Kiralandı.";
         public static string Untenantable = "Kiralanamaz.";
+
+        public static string CarImageLimit = "Maksimum fotograf sayısına ulaşıldı";
     }
 }
