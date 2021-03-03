@@ -16,5 +16,14 @@ namespace Business.Constants
         public static string Untenantable = "Kiralanamaz.";
 
         public static string CarImageLimit = "Maksimum fotograf sayısına ulaşıldı";
+        public static string AuthorizationDenied = "İşlem yetkiniz bulunmamaktadır";
+
+        public static string UserRegistered = "Kullanıcı kaydedildi";
+
+        public static string UserNotFound = "Kullanıcı bulunamadı.";
+        public static string PasswordError = "Parola hatalı";
+        public static string SuccessFullLogin = "Giriş başarılı";
+        public static string UserAlreadyExists = "Kullanıcı zaten kayıtlı";
+        public static string AccessTokenCreated = "Erişim anahtarı oluşturuldu";
     }
 }

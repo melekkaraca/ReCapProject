@@ -2,6 +2,7 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -32,6 +33,8 @@ namespace Business.Concrete
             _brandDal.Update(entity);
             return new SuccessResult($"{entity.Name } { Messages.Updaded}");
         }
+
+        
         public IResult Delete(int id)
         {
             var entity = GetById(id).Data;
@@ -42,6 +45,8 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.Listed);
         }
+        
+        [CacheAspect(duration: 10)]
         public IDataResult<Brand> GetById(int id)
         {
             return new SuccessDataResult<Brand>(_brandDal.Get(b=>b.Id == id));

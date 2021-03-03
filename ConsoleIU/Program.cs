@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFrameWork;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -20,7 +21,7 @@ namespace ConsoleIU
         private static void UserTest()
         {
             UserManager userManager = new UserManager(new EFUserDal());
-            userManager.Add(new User { FirstName = "Rabiha", LastName = "Karaca", Email = "rabihakaraca97@gmail.com", Password = "1234" });
+            userManager.Add(new User { FirstName = "Rabiha", LastName = "Karaca", Email = "rabihakaraca97@gmail.com" });
         }
 
         private static void BrandTest()
@@ -39,7 +40,7 @@ namespace ConsoleIU
             }
             Console.WriteLine();
             var deletedBrand = brandManager.GetById(3);
-            brandManager.Delete(deletedBrand.Data);
+            brandManager.Delete(deletedBrand.Data.Id);
             Console.WriteLine();
             foreach (var item in brandManager.GetAll().Data)
             {
