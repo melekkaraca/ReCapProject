@@ -15,7 +15,6 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    [LogAspect(typeof(FileLogger))]
     public class BrandManager : IBrandService
     {
         IBrandDal _brandDal;
