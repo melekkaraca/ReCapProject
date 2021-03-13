@@ -25,7 +25,17 @@ namespace WebAPI.Controllers
             var result = _carService.GetAll();
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
+        }
+        [HttpGet("GetAllCarDetail")]
+        public IActionResult GetAllCarDetail()
+        {
+            var result = _carService.GetAllCarDetail();
+            if (result.Success)
+            {
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
@@ -36,7 +46,7 @@ namespace WebAPI.Controllers
             var result = _carService.GetById(id);
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
