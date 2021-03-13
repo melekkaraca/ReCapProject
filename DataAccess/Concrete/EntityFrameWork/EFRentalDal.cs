@@ -27,6 +27,8 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  Id = r.Id,
                                  BrandName = b.Name,
                                  CustomerName = u.FirstName + " " + u.LastName,
+                                 RentDate = r.RentDate,
+                                 ReturnDate = r.ReturnDate.Value,
 
                              };
                 return result.ToList();
