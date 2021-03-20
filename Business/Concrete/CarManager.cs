@@ -9,6 +9,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -107,6 +108,11 @@ namespace Business.Concrete
         public IDataResult<List<CarDetailDto>> GetAllCarDetailByColorId(int id)
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetail(c => c.ColorId == id));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailByCarId(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetail(c => c.CarId == id));
         }
     }
 }
