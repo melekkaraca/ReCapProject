@@ -29,9 +29,8 @@ namespace Business.Concrete
             return new SuccessResult($" {Messages.Rental}");
         }
 
-        public IResult Delete(int id)
+        public IResult Delete(Rental entity)
         {
-            var entity = GetById(id).Data;
             _rentalDal.Delete(entity);
             return new SuccessResult($"{Messages.Deleted}");
         }

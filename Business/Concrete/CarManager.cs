@@ -74,10 +74,9 @@ namespace Business.Concrete
                 return new SuccessResult(Messages.Updaded);
             }
         }
-        public IResult Delete(int id)
+        public IResult Delete(Car car)
         {
-            var entity = GetById(id).Data;
-            _carDal.Delete(entity);
+            _carDal.Delete(car);
             return new SuccessResult(Messages.Deleted);
         }
         public IDataResult<Car> GetById(int id)

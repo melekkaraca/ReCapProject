@@ -31,9 +31,8 @@ namespace Business.Concrete
             _colorDal.Update(entity);
             return new SuccessResult($"{entity.Name} {Messages.Updaded}");
         }
-        public IResult Delete(int id)
+        public IResult Delete(Color entity)
         {
-            var entity = GetById(id).Data;
             _colorDal.Delete(entity);
             return new SuccessResult($"{entity.Name} {Messages.Deleted}");
         }

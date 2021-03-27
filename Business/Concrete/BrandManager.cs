@@ -23,7 +23,7 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        [SecuredOperation("brand.add,editor")]
+        //[SecuredOperation("brand.add,editor")]
         [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand entity)
         {
@@ -37,15 +37,14 @@ namespace Business.Concrete
         }
 
         
-        public IResult Delete(int id)
+        public IResult Delete(Brand entity)
         {
-            var entity = GetById(id).Data;
             _brandDal.Delete(entity);
             return new SuccessResult($"{entity.Name} {Messages.Deleted}");
         }
 
         
-        [CacheAspect]
+        //[CacheAspect]
         public IDataResult<List<Brand>> GetAll()
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.Listed);

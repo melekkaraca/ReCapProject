@@ -10,7 +10,7 @@ namespace Core.Business
     {
         IResult Add(T entity);
         IResult Update(T entity);
-        IResult Delete(int id);
+        IResult Delete(T entity);
         IDataResult<T> GetById(int id);
         IDataResult<List<T>> GetAll();
     }
