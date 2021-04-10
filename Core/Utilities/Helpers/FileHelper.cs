@@ -44,7 +44,7 @@ namespace Core.Utilities.Helpers
             FileInfo ff = new FileInfo(file.FileName);
             string fileExtension = ff.Extension;
             var newPath = Guid.NewGuid().ToString() + fileExtension;
-            string result = $@"Images/{newPath}";
+            string result = $@"images/{newPath}";
             return result;
         }
 

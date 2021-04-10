@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -74,6 +75,16 @@ namespace WebAPI.Controllers
         public IActionResult Update(Rental rental)
         {
             var result = _rentalService.Update(rental);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
+        }
+        [HttpPost("rent")]
+        public IActionResult Rent(RentDto rent)
+        {
+            var result = _rentalService.Rent(rent);
             if (result.Success)
             {
                 return Ok(result);

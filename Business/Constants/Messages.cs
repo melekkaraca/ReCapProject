@@ -25,5 +25,8 @@ namespace Business.Constants
         public static string SuccessFullLogin = "Giriş başarılı";
         public static string UserAlreadyExists = "Kullanıcı zaten kayıtlı";
         public static string AccessTokenCreated = "Erişim anahtarı oluşturuldu";
+        public static string CarNotRentDate = "Araç başkası tarafından kiralanmış.";
+        public static string PaymentReceived = "Ödeme alındı.";
+        public static string PaymentCouldNotBeReceived = "Ödeme alınamadı";
     }
 }
