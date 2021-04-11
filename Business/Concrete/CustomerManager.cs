@@ -39,6 +39,13 @@ namespace Business.Concrete
             return new SuccessDataResult<Customer>(_customerDal.Get(u => u.Id == id));
         }
 
+        public IDataResult<int> GetFindexPoint(int customerId)
+        {
+            Random random = new Random();
+            var findexPoint = random.Next(0, 2500);
+            return new SuccessDataResult<int>(findexPoint);
+        }
+
         public IResult Update(Customer entity)
         {
             _customerDal.Update(entity);

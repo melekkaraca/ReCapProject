@@ -8,15 +8,18 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Business.Concrete
 {
     public class RentalManager : IRentalService
     {
         IRentalDal _rentalDal;
-        public RentalManager(IRentalDal rentalDal)
+        ICustomerService _customerService;
+        public RentalManager(IRentalDal rentalDal, ICustomerService customerService)
         {
             _rentalDal = rentalDal;
+            _customerService = customerService;
         }
 
         public IResult Add(Rental entity)
@@ -58,7 +61,7 @@ namespace Business.Concrete
 
         public IResult Rent(RentDto rentDto)
         {
-            IResult result = BusinessRules.Run(CheckDate(rentDto.CarId));
+            IResult result = BusinessRules.Run(CheckDate(rentDto.CarId), CheckFindexPoint(rentDto.CustomerId));
             if (result != null)
             {
                 return result;
@@ -76,6 +79,15 @@ namespace Business.Concrete
                 {
                     return new ErrorResult(Messages.CarNotRentDate);
                 }
+            }
+            return new SuccessResult();
+        }
+        private IResult CheckFindexPoint(int customerId)
+        {
+            var result = _customerService.GetFindexPoint(customerId);
+            if (result.Data<0 && result.Data>1900)
+            {
+                return new ErrorResult(Messages.FindexPointsAreNotEnough);
             }
             return new SuccessResult();
         }

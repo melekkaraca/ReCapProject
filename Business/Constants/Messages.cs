@@ -28,5 +28,6 @@ namespace Business.Constants
         public static string CarNotRentDate = "Araç başkası tarafından kiralanmış.";
         public static string PaymentReceived = "Ödeme alındı.";
         public static string PaymentCouldNotBeReceived = "Ödeme alınamadı";
+        public static string FindexPointsAreNotEnough = "Findex puanı yeterli değil";
     }
 }
